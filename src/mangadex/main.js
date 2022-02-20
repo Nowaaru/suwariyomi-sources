@@ -5,6 +5,35 @@ const {
   setGlobalLocale,
 } = require("./lib/mangadex-full-api/index.js");
 
+const convertToQueryable = ({
+  query: title,
+  tagInclusivity: includedTagsMode,
+  tagExclusivity: excludedTagsMode,
+  includedTags,
+  sortOrderBy,
+  sortOrderDirection,
+  excludedTags,
+  contentRating,
+  results: limit,
+  originalLanguage,
+  offset,
+}) => {
+  return {
+    title,
+    includedTagsMode,
+    excludedTagsMode,
+    order: {
+      [sortOrderBy]: sortOrderDirection,
+    },
+    includedTags,
+    excludedTags,
+    contentRating,
+    limit,
+    originalLanguage,
+    offset: offset * limit,
+  };
+};
+
 module.exports = class {
   constructor() {
     this.serialize = this.serialize.bind(this);
@@ -269,7 +298,25 @@ module.exports = class {
   // Should be able to convert from your object format to the FullManga object format.
   // doFull false should omit the Chapters and Authors.
   async serialize(mangaItem, doFull) {
-    return false;
+    return {
+      Name: mangaItem.localizedTitle.localString,
+      MangaID: mangaItem.id,
+      SourceID: this.getName(),
+      Authors: doFull ? await this.getAuthors(mangaItem.id) : undefined,
+      Synopsis: mangaItem.localizedDescription.localString,
+      Tags: mangaItem.tags.map((tag) => tag.localizedName.localString),
+      CoverURL: (await mangaItem.getCovers())?.slice(-1)[0]?.image512,
+      Added: undefined,
+      LastRead: undefined,
+      Chapters: doFull
+        ? await this.serializeChapters(
+            await mangaItem.getFeed({
+              translatedLanguage: [this._locale], // TODO: See above.
+              limit: Infinity,
+            })
+          )
+        : undefined,
+    };
   }
 
   // Should be a list of image URLs.
