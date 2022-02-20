@@ -14,6 +14,12 @@ describe("Source", () => {
     expect(myObject._locales.includes(myObject._locale)).toBe(true);
   });
 
+  describe("Metadata", () => {
+    it("should exist", () => {
+      expect(myObject.metadata).toBeDefined();
+    });
+  });
+
   describe("Search Filters", () => {
     it("should include fields 'query', 'results', and 'offset'", () => {
       const Filters = myObject.getFilters();
