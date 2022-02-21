@@ -305,15 +305,18 @@ module.exports = class {
       Authors: doFull ? await this.getAuthors(mangaItem.id) : undefined,
       Synopsis: mangaItem.localizedDescription.localString,
       Tags: mangaItem.tags.map((tag) => tag.localizedName.localString),
-      CoverURL: (await mangaItem.getCovers())?.slice(-1)[0]?.image512,
+      CoverURL: (await mangaItem.mainCover.resolve())?.image512,
       Added: undefined,
       LastRead: undefined,
       Chapters: doFull
         ? await this.serializeChapters(
-            await mangaItem.getFeed({
-              translatedLanguage: [this._locale], // TODO: See above.
-              limit: Infinity,
-            })
+            await mangaItem.getFeed(
+              {
+                translatedLanguage: [this._locale], // TODO: See above.
+                limit: Infinity,
+              },
+              true
+            )
           )
         : undefined,
     };
@@ -322,7 +325,6 @@ module.exports = class {
   // Should be a list of image URLs.
   async getPages(chapterID) {
     const chapter = await Chapter.get(chapterID);
-    console.log(chapter);
     return chapter.getReadablePages();
   }
 
@@ -335,7 +337,9 @@ module.exports = class {
           // it probably isn't hosted on MangaDex; therefore, no inclusion.
           // Also, if the manga is not published (readableAt is greater than the current date)
           // then it is probably not published yet either; therefore, also no inclusion.
-          (x) => !(x.isExternal && x.externalUrl) && x.readableAt <= new Date()
+          (x) =>
+            !(x.isExternal && x.externalUrl) &&
+            (!x.readableAt || x.readableAt <= new Date())
         )
         .map(async (chapter) => {
           return {
@@ -351,8 +355,8 @@ module.exports = class {
             Chapter: +chapter.chapter,
             PageCount: chapter.pages,
             ChapterTitle: chapter.title,
-            Groups: (await resolveArray(chapter.groups)).map(
-              (group) => group.name
+            Groups: await Promise.all(
+              chapter.groups.map(async (group) => (await group.resolve())?.name)
             ),
           };
         })
