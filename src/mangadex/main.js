@@ -320,7 +320,7 @@ module.exports = class {
   }
 
   // Should be a list of image URLs.
-  async getPages(chapterId) {
+  async getPages(chapterID) {
     const chapter = await Chapter.get(chapterID);
     console.log(chapter);
     return chapter.getReadablePages();
