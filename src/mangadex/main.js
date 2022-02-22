@@ -61,8 +61,8 @@ module.exports = class {
 
   _sourceName = "MangaDex";
   _metadata = {
-    _version: "1.0.0",
-    _for: "~0.8.0",
+    _version: "1.1.0",
+    _for: "~0.9.0",
     _author: "Nowaaru",
     isNSFW: false,
 
@@ -281,6 +281,12 @@ module.exports = class {
   async getManga(mangaID, doFull) {
     return Manga.get(mangaID).then((mangaObject) =>
       this.serialize(mangaObject, doFull)
+    );
+  }
+
+  async getMangas(mangaIDs, doFull) {
+    return await Manga.getMultiple(mangaIDs).then((mangaObjects) =>
+      mangaObjects.map((mangaObject) => this.serialize(mangaObject, doFull))
     );
   }
 
