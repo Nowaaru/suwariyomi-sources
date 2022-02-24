@@ -107,7 +107,17 @@ module.exports = class {
 
   // tagID is present in case a user wants to search by tag (if supported).
   Tags = Manga.getAllTags().then((Tags) =>
-    Tags.map((Tag) => ({ tagName: Tag.name, tagID: Tag.id }))
+    Tags.map((Tag) => ({
+      tagName: Tag.name
+        .replace(/(\w)(\w+)/g, (val) => {
+          if (val.length >= 4)
+            return `${val[0].toUpperCase()}${val.substring(1)}`;
+
+          return val;
+        })
+        .replace(/(\w)/, (x) => (x === "i" ? "I" : x)),
+      tagID: Tag.id,
+    }))
   );
 
   tagColours = {
