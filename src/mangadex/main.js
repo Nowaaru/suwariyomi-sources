@@ -42,6 +42,8 @@ module.exports = class {
     this.getManga = this.getManga.bind(this);
 
     this.setLocale("en");
+    this.tagColors = this.tagColours;
+
     this.Tags.then((tags) => {
       this.searchFilterFieldTypes["Included Tags"] = {
         fieldType: "checkbox3",
