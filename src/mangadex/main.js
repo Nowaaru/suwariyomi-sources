@@ -334,6 +334,17 @@ module.exports = class {
       (tag) => tag.localizedName.localString
     );
 
+    {
+      // If a tag has a color, push it to the front.
+      const coloredTags = mangaTags.filter((tag) => tag in this.tagColours);
+      const nonColoredTags = mangaTags.filter(
+        (tag) => !(tag in this.tagColours)
+      );
+
+      mangaTags.length = 0;
+      mangaTags.push(...coloredTags, ...nonColoredTags);
+    }
+
     const capitalizedRating =
       mangaItem.contentRating.charAt(0).toUpperCase() +
       mangaItem.contentRating.slice(1);
