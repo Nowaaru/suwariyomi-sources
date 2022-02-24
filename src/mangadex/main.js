@@ -108,6 +108,14 @@ module.exports = class {
     Tags.map((Tag) => ({ tagName: Tag.name, tagID: Tag.id }))
   );
 
+  tagColours = {
+    Pornographic: "#DF2935",
+    Suggestive: "#FDCA40",
+    Anthology: "#3772FF",
+    Doujinshi: "#8B4E9A",
+    Erotica: "#EE7A3B",
+  };
+
   // Should be able to resolve to a locale-specific string.
   _locale = "en";
 
@@ -310,13 +318,24 @@ module.exports = class {
   // Should be able to convert from your object format to the FullManga object format.
   // doFull false should omit the Chapters and Authors.
   async serialize(mangaItem, doFull) {
+    const mangaTags = mangaItem.tags.map(
+      (tag) => tag.localizedName.localString
+    );
+
+    const capitalizedRating =
+      mangaItem.contentRating.charAt(0).toUpperCase() +
+      mangaItem.contentRating.slice(1);
+
+    if (this.tagColours[capitalizedRating]) {
+      mangaTags.unshift(capitalizedRating);
+    }
     return {
       Name: mangaItem.localizedTitle.localString,
       MangaID: mangaItem.id,
       SourceID: this.getName(),
       Authors: doFull ? await this.getAuthors(mangaItem.id) : undefined,
       Synopsis: mangaItem.localizedDescription.localString,
-      Tags: mangaItem.tags.map((tag) => tag.localizedName.localString),
+      Tags: mangaTags,
       CoverURL: (await mangaItem.mainCover.resolve())?.image512,
       Added: undefined,
       LastRead: undefined,
