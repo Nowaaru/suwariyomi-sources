@@ -298,7 +298,13 @@ module.exports = class {
   // Should implicitly serialize to the Chapter object format.
   async getChapters(mangaID) {
     const manga = await Manga.get(mangaID);
-    return this.serializeChapters(await manga.getFeed());
+    return this.serializeChapters(
+      await manga.getFeed({
+        translatedLanguage: [this._locale],
+        limit: Infinity,
+        contentRating: ["safe", "suggestive", "erotica", "pornographic"],
+      })
+    );
   }
 
   // Should be able to convert from your object format to the FullManga object format.
@@ -320,6 +326,12 @@ module.exports = class {
               {
                 translatedLanguage: [this._locale], // TODO: See above.
                 limit: Infinity,
+                contentRating: [
+                  "safe",
+                  "suggestive",
+                  "erotica",
+                  "pornographic",
+                ],
               },
               true
             )
