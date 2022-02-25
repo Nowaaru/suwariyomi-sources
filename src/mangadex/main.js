@@ -358,7 +358,7 @@ module.exports = class {
       SourceID: this.getName(),
       Authors: doFull ? await this.getAuthors(mangaItem.id) : undefined,
       Synopsis: mangaItem.localizedDescription.localString,
-      Tags: mangaTags,
+      Tags: mangaTags.sort((a, b) => a.localeCompare(b)),
       CoverURL: (await mangaItem.mainCover.resolve())?.image512,
       Added: undefined,
       LastRead: undefined,
