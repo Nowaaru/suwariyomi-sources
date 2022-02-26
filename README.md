@@ -27,10 +27,10 @@ frequently, so buckle up!
 If a source isn't there, you can do two things:
 
 - Request the source by making an issue.
-- [Make the source yourself](https://github.com/Nowaaru/suwariyomi-source-base) and then [make a pull request](https://github.com/Nowaaru/suwariyomi-sources/compare)
+- [Make the source yourself](https://github.com/Nowaaru/suwariyomi-source-base) and then [make a pull request](https://github.com/Nowaaru/suwariyomi-sources/compare).
 
 If you want to request the source, it's not guaranteed to be created for multiple reasons - most commonly because nobody wants to implement it, but in rare cases it may be impossible to easily make a source because of service limitations; such as extremely low rate limits or a membership service.
 
 <br />
 
-If you want to make a new source, please check out this [repository](https://github.com/Nowaaru/suwariyomi-source-base) and also [`CONTRIBUTING.md`](https://github.com/Nowaaru/suwariyomi-sources/blob/main/README.md).
+If you want to make a new source, please check out this [repository](https://github.com/Nowaaru/suwariyomi-source-base) and also [`CONTRIBUTING.md`](https://github.com/Nowaaru/suwariyomi-sources/blob/main/CONTRIBUTING.md).
