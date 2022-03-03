@@ -16,7 +16,7 @@ frequently, so buckle up!
 
    - In Linux, this should be [`~/.config/suwariyomi`](https://www.electronjs.org/docs/latest/api/app#appgetpathname) or [`$XDG_CONFIG_HOME/suwariyomi`](https://www.electronjs.org/docs/latest/api/app#appgetpathname).
 
-   - ###### Note that these may change depending on your system settings. If you've enabled case sensitivity in your filesystem, suwariyomi is **lowercase** in it's directory.
+   - ###### Note that these may change depending on your system settings. If you've enabled case sensitivity in your filesystem, suwariyomi is **lowercase** in its directory.
 
 3. Move your source folder into `suwariyomi/sources` - if it's zipped then unzip it, of course.
 4. Restart your reader by pressing `CTRL + R` in-app (if it is open)
