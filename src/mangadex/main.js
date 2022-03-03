@@ -63,8 +63,8 @@ module.exports = class {
 
   _sourceName = "MangaDex";
   _metadata = {
-    _version: "1.1.0",
-    _for: "~0.10.0",
+    _version: "1.1.10",
+    _for: "~0.11.0",
     _author: "Nowaaru",
     isNSFW: false,
 
