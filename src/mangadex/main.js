@@ -63,8 +63,8 @@ module.exports = class {
 
   _sourceName = "MangaDex";
   _metadata = {
-    _version: "1.1.10",
-    _for: "~0.11.0",
+    _version: "1.2.0",
+    _for: "~0.12.0",
     _author: "Nowaaru",
     isNSFW: false,
 
@@ -98,11 +98,7 @@ module.exports = class {
 
   // Should change after each search. If this is not supported, change to Infinity.
   async getItemCount() {
-    const searchAmount = await Manga.getTotalSearchResults(
-      convertToQueryable(this.searchFilters)
-    );
-
-    return searchAmount;
+    return Manga.getTotalSearchResults(convertToQueryable(this.searchFilters));
   }
 
   // tagID is present in case a user wants to search by tag (if supported).
@@ -305,7 +301,7 @@ module.exports = class {
   }
 
   async getMangas(mangaIDs, doFull) {
-    return await Manga.getMultiple(mangaIDs).then((mangaObjects) =>
+    return Manga.getMultiple(mangaIDs).then((mangaObjects) =>
       mangaObjects.map((mangaObject) => this.serialize(mangaObject, doFull))
     );
   }
@@ -315,16 +311,22 @@ module.exports = class {
     return `https://mangadex.org/manga/${mangaID}`;
   }
 
+  // Made async incase it needs to make a request to an external API
+  async IDFromURL(url) {
+    return url.match(/\/(?:manga|title)\/(.+)\/?$/)?.pop();
+  }
+
   // Should implicitly serialize to the Chapter object format.
   async getChapters(mangaID) {
-    const manga = await Manga.get(mangaID);
-    return this.serializeChapters(
-      await manga.getFeed({
-        translatedLanguage: [this._locale],
-        limit: Infinity,
-        contentRating: ["safe", "suggestive", "erotica", "pornographic"],
+    return Manga.get(mangaID)
+      .then((manga) => {
+        return manga.getFeed({
+          translatedLanguage: [this._locale],
+          limit: Infinity,
+          contentRating: ["safe", "suggestive", "erotica", "pornographic"],
+        });
       })
-    );
+      .then(this.serializeChapters);
   }
 
   // Should be able to convert from your object format to the FullManga object format.
@@ -352,40 +354,46 @@ module.exports = class {
     if (this.tagColours[capitalizedRating]) {
       mangaTags.unshift(capitalizedRating);
     }
+
+    let coverURL;
+    let chapters;
+    let authors;
+    try {
+      coverURL = (await mangaItem.mainCover.resolve())?.image512;
+      if (doFull) {
+        authors = await this.getAuthors(mangaItem.id);
+        chapters = await this.serializeChapters(
+          await mangaItem.getFeed(
+            {
+              translatedLanguage: [this._locale], // TODO: See above.
+              limit: Infinity,
+              contentRating: ["safe", "suggestive", "erotica", "pornographic"],
+            },
+            true
+          )
+        );
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
     return {
       Name: mangaItem.localizedTitle.localString,
       MangaID: mangaItem.id,
       SourceID: this.getName(),
-      Authors: doFull ? await this.getAuthors(mangaItem.id) : undefined,
+      Authors: authors,
       Synopsis: mangaItem.localizedDescription.localString,
       Tags: mangaTags.sort((a, b) => a.localeCompare(b)),
-      CoverURL: (await mangaItem.mainCover.resolve())?.image512,
+      CoverURL: coverURL,
       Added: undefined,
       LastRead: undefined,
-      Chapters: doFull
-        ? await this.serializeChapters(
-            await mangaItem.getFeed(
-              {
-                translatedLanguage: [this._locale], // TODO: See above.
-                limit: Infinity,
-                contentRating: [
-                  "safe",
-                  "suggestive",
-                  "erotica",
-                  "pornographic",
-                ],
-              },
-              true
-            )
-          )
-        : undefined,
+      Chapters: chapters,
     };
   }
 
   // Should be a list of image URLs.
   async getPages(chapterID) {
-    const chapter = await Chapter.get(chapterID);
-    return chapter.getReadablePages();
+    return Chapter.get(chapterID).then((chapter) => chapter.getReadablePages());
   }
 
   // Should be able to convert from your object format to the Chapter object format.
@@ -425,8 +433,9 @@ module.exports = class {
 
   // Should return a promise that resolves to an array of authors.
   async getAuthors(mangaID) {
-    const manga = await Manga.get(mangaID);
-    return (await resolveArray(manga.authors)).map((x) => x.name);
+    return Manga.get(mangaID)
+      .then((manga) => resolveArray(manga.authors))
+      .then((x) => x.map((y) => y.name));
   }
 
   // Should return a promise that resolves to an array of your manga object format.
