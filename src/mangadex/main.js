@@ -312,7 +312,8 @@ module.exports = class {
   }
 
   // Made async incase it needs to make a request to an external API
-  async IDFromURL(url) {
+  async IDFromURL(url, type) {
+    if (type === "chapter") return url.match(/\/chapter\/(.+)\/?$/)?.pop();
     return url.match(/\/(?:manga|title)\/(.+)\/?$/)?.pop();
   }
 
