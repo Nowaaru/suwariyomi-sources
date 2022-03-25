@@ -1,7 +1,7 @@
 #! /bin/bash
 set -e # prevent errors
 
-SOURCES = (main/src/*)
+SOURCES=(main/src/*)
 mkdir -p dist/zip
 
 for SOURCE in ${SOURCES[@]}; do
