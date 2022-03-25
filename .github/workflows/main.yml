@@ -34,3 +34,7 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+      # this is so extremely confusing
+      - name: Run test sciprt
+        run: bash main/.github/scripts/gen-dist.sh
