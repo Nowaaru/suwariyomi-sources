@@ -37,4 +37,4 @@ jobs:
 
       # this is so extremely confusing
       - name: Run test script
-        run: ls src/mangadex
+        run: ls -a --color
