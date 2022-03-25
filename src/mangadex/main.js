@@ -62,10 +62,8 @@ module.exports = class {
   }
 
   _sourceName = "MangaDex";
-  _metadata = {
-    version: "1.2.0",
-    isNSFW: true,
-  };
+  
+  _metadata = require("./metadata.json");
 
   getName() {
     return this._sourceName;
