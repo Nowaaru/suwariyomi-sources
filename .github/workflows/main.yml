@@ -37,6 +37,4 @@ jobs:
 
       # this is so extremely confusing
       - name: Run test script
-        run: |
-          cd main
-          ./.github/scripts/gen-dist.sh
+        run: ls
