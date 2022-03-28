@@ -7,13 +7,11 @@ if [ -d "dist/zip" ]; then
   rm -rf dist/zip
 fi
 
-cd .. # go back to the root directory
-
 git config --global user.email "github-actions[bot]@users.noreply.github.com"
 git config --global user.name "github-actions[bot]"
 git status
 
-
+cd .. # go back to the root directory
 
 SOURCES=(./src/*)
 for SOURCE in ${SOURCES[@]}; do
