@@ -4,7 +4,8 @@ set -e # prevent errors
 SOURCES=(./src/*)
 mkdir -p dist/zip
 
-ls ../
+
+ls $PWD
 for SOURCE in ${SOURCES[@]}; do
     echo "Compressing $SOURCE"
     zip -r dist/zip/$(basename $SOURCE).zip $SOURCE
