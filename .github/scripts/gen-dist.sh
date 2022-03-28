@@ -17,10 +17,13 @@ git status
 cd .. # go back to the root directory
 
 SOURCES=(./src/*)
+
+echo "begin compression"
 for SOURCE in ${SOURCES[@]}; do
     echo "Compressing $SOURCE"
     zip -r dist/zip/$(basename $SOURCE).zip $SOURCE
 done
+echo "end compression"
 
 cd dist
 git add .
