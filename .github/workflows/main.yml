@@ -37,7 +37,7 @@ jobs:
 
       # Compress source code to be pushed to dist branch
       - name: Compress source code
-        run: ./.github/scripts/gen-dist.sh
+        run: bash ./.github/scripts/gen-dist.sh
 
       # Push compressed code into dist branch
       - name: Push git subdirectory as branch
