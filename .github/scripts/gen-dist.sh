@@ -1,4 +1,5 @@
 #! /bin/bash
+echo "starting"
 set -e # prevent errors
 
 git clone https://github.com/Nowaaru/suwariyomi-sources.git --depth 1 --branch dist ./dist
