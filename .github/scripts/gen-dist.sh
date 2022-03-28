@@ -8,8 +8,6 @@ if [ -d "dist/zip" ]; then
 fi
 
 mkdir -p dist/zip
-cd .. # go back to the root directory
-
 SOURCES=(./src/*)
 for SOURCE in ${SOURCES[@]}; do
     echo "Compressing $SOURCE"
