@@ -1,7 +1,7 @@
 #! /bin/bash
 set -e # prevent errors
 
-git clone https://github.com/Nowaaru/suwariyomi-sources.git --depth 1 --branch ./dist
+git clone https://github.com/Nowaaru/suwariyomi-sources.git --depth 1 --branch dist ./dist
 # check if the "zip" folder exists in the "dist" folder - if it does, then clear it out
 if [ -d "dist/zip" ]; then
   rm -rf dist/zip
