@@ -1,11 +1,14 @@
 #! /bin/bash
 set -e # prevent errors
 
-git clone https://github.com/Nowaaru/suwariyomi-sources.git --depth 1 --branch dist
+git clone https://github.com/Nowaaru/suwariyomi-sources.git --depth 1 --branch ./dist
 # check if the "zip" folder exists in the "dist" folder - if it does, then clear it out
 if [ -d "dist/zip" ]; then
   rm -rf dist/zip
 fi
+
+cd dist;
+mkdir -p zip
 
 git config --global user.email "github-actions[bot]@users.noreply.github.com"
 git config --global user.name "github-actions[bot]"
