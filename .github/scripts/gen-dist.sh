@@ -8,3 +8,5 @@ for SOURCE in ${SOURCES[@]}; do
     echo "Compressing $SOURCE"
     zip -r dist/zip/$(basename $SOURCE).zip $SOURCE
 done
+
+ls dist/zip
