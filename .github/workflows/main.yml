@@ -4,6 +4,10 @@ name: CI
 
 # Controls when the workflow will run
 on:
+  concurrency:
+    group: ${{ (github.event_name == 'pull_request' && github.event.pull_request.number) || github.head_ref }}
+    cancel-in-progress: true
+    
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
