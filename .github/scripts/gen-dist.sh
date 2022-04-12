@@ -8,8 +8,8 @@ SOURCES=(./src/*)
 for SOURCE in ${SOURCES[@]}; do
     echo "Compressing $SOURCE"
     cd $SOURCE
-    zip -r -j $ROOTDIR/dist/zip/$(basename $SOURCE).zip ./
+    zip -r $ROOTDIR/dist/zip/$(basename $SOURCE).zip ./
 done
 
 echo "Compressed files:"
-ls dist/zip
+ls $ROOTDIR/dist/zip
