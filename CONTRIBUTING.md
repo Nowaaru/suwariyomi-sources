@@ -14,4 +14,6 @@ With that out of they way, contributing is a fairly simple and painless task. If
 - Keep your code clean! Having maintainable code allows us to be able to make fixes, QoL changes, and so on.
   - Yes, this includes commenting if need be.
 
+If you are not doing anything related to sources, but rather anything meta-related.. please be sure to tag "\[ci skip\]" (or "\[skip ci]") at the beginning of your commit (or use ci.skip in your cli: `git push -o ci.skip`)
+
 Once you've read and validated all of these, go ahead and make your **pull request**!
