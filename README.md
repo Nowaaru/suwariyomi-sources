@@ -7,8 +7,9 @@ This is where you get all of your sources for **Suwariyomi.**
 It's an arduous process for those who don't go through the process
 frequently, so buckle up!
 
-1. Download any source you want.
-2. Navigate to your application data folder - **not** the install folder.
+1. Change to the [`dist`](https://github.com/Nowaaru/suwariyomi-sources/tree/dist) repository.
+2. Download any source you want.
+3. Navigate to your application data folder - **not** the install folder.
 
    - In Windows, this should be `%APPDATA%/Suwariyomi`.
 
