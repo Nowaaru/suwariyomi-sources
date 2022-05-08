@@ -14,6 +14,6 @@ fs.readdirSync(srcDirectory).forEach((folder) => {
 });
 
 fs.writeFileSync(
-  path.join(mainDirectory, "dist"),
+  path.join(mainDirectory, "dist", "metadata.json"),
   JSON.stringify(totalJSON, null, 2)
 );
