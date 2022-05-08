@@ -29,6 +29,10 @@ jobs:
       - name: Compress source code
         run: bash ./.github/scripts/gen-dist.sh
 
+      # After compressing, make a catalogue file that shows all sources.
+      - name: Make new Catalogue after compression
+        run: bash ./.github/scripts/gen-json.sh
+
       # Push compressed code into dist branch
       - name: Push git subdirectory as branch
         uses: s0/git-publish-subdir-action@v2.5.1
