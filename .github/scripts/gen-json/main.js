@@ -44,7 +44,7 @@ fs.readdirSync(srcDirectory).forEach((folder) => {
         console.warn(
           "WARNING! Metadata has an invalid value for key:",
           key,
-          "expected",
+          "- expected",
           schemaLayout[key]?.name,
           "got",
           typeof metadata[key]
