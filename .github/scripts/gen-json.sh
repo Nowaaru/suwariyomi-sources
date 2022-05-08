@@ -1,1 +1,1 @@
-node gen-json/main.js
+node ./.github/scripts/gen-json/main.js
