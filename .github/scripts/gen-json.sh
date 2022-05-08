@@ -1,1 +1,1 @@
-node ./gen-json/main.js
+node gen-json/main.js
