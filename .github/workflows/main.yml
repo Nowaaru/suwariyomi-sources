@@ -35,7 +35,7 @@ jobs:
         env:
             REPO: self
             BRANCH: dist
-            FOLDER: dist/zip
+            FOLDER: dist
             MESSAGE: "Update `dist` with repository"
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
