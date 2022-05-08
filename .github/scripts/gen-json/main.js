@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 
-const mainDirectory = "../../../";
+const mainDirectory = path.resolve("../../../");
 const srcDirectory = path.join(mainDirectory, "src");
 
 const totalJSON = [];
