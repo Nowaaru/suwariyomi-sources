@@ -54,6 +54,8 @@ fs.readdirSync(srcDirectory).forEach((folder) => {
         return delete metadata[key];
       }
     });
+
+    metadata.zip = `https://github.com/Nowaaru/suwariyomi-sources/raw/dist/zip/${folder}.zip`;
     totalJSON.push(metadata);
   }
 });
