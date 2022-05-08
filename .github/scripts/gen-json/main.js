@@ -5,8 +5,7 @@ const mainDirectory = path.resolve("./");
 const srcDirectory = path.join(mainDirectory, "src");
 
 const schemaLayout = {
-  displayName: String,
-  zip: String,
+  name: String,
   version: String,
   nsfw: Boolean,
   icon: String,

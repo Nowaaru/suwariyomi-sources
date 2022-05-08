@@ -4,6 +4,7 @@ const {
   Manga,
   setGlobalLocale,
 } = require("./lib/mangadex-full-api/index.js");
+const metadata = require("./metadata.json");
 
 const convertToQueryable = ({
   query: title,
@@ -62,14 +63,14 @@ module.exports = class {
   }
 
   _sourceName = "MangaDex";
-  
-  _metadata = require("./metadata.json");
+
+  _metadata = metadata;
 
   getName() {
     return this._sourceName;
   }
 
-  _icon = "https://mangadex.org/favicon.ico";
+  _icon = metadata.icon;
 
   getIcon() {
     return this._icon;

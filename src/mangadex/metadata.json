@@ -1,5 +1,6 @@
 {
-  "displayName": "MangaDex",
+  "name": "MangaDex",
   "version": "1.2.0",
-  "isNSFW": true
+  "icon": "https://mangadex.org/favicon.ico",
+  "nsfw": true
 }
