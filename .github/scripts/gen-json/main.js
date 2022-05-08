@@ -15,8 +15,8 @@ const schemaLayout = {
 const totalJSON = [];
 fs.readdirSync(srcDirectory).forEach((folder) => {
   const jsonPath = path.join(srcDirectory, folder, "metadata.json");
-  if (fs.existsSync(jsonDirectory)) {
-    const metadata = require(jsonDirectory);
+  if (fs.existsSync(jsonPath)) {
+    const metadata = require(jsonPath);
     Object.keys(schemaLayout).forEach((key) => {
       let isValueIncorrect = false;
       switch (schemaLayout[key]) {
