@@ -9,6 +9,7 @@ const schemaLayout = {
   version: String,
   nsfw: Boolean,
   icon: String,
+  lang: Array,
 };
 
 const totalJSON = [];
@@ -34,6 +35,10 @@ fs.readdirSync(srcDirectory).forEach((folder) => {
             isValueIncorrect = true;
           }
           break;
+        case Array:
+          if (!Array.isArray(metadata[key])) {
+            isValueIncorrect = true;
+          }
         default:
           console.warn("WARNING! Metadata has an unknown key:", key);
           return delete metadata[key];
