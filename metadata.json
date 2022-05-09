@@ -1,7 +1,7 @@
 [
   {
     "name": "MangaDex",
-    "version": "1.2.0",
+    "version": "1.2.2",
     "icon": "https://mangadex.org/favicon.ico",
     "nsfw": true,
     "zip": "mangadex"
