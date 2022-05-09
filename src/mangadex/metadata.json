@@ -2,5 +2,6 @@
   "name": "MangaDex",
   "version": "1.2.0",
   "icon": "https://mangadex.org/favicon.ico",
-  "nsfw": true
+  "nsfw": true,
+  "lang": ["en"]
 }
