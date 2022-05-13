@@ -9,7 +9,7 @@ const schemaLayout = {
   version: String,
   nsfw: Boolean,
   icon: String,
-  lang: Array,
+  lang: String, // "all" + language codes like "en" or "zh-tw"
 };
 
 const totalJSON = [];
