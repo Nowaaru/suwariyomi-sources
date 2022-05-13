@@ -4,6 +4,9 @@
     "version": "1.2.2",
     "icon": "https://mangadex.org/favicon.ico",
     "nsfw": true,
+    "lang": [
+      "en"
+    ],
     "zip": "mangadex"
   }
 ]
