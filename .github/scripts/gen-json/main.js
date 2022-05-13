@@ -39,6 +39,7 @@ fs.readdirSync(srcDirectory).forEach((folder) => {
           if (!Array.isArray(metadata[key])) {
             isValueIncorrect = true;
           }
+          break;
         default:
           console.warn("WARNING! Metadata has an unknown key:", key);
           return delete metadata[key];
