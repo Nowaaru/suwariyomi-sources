@@ -76,14 +76,14 @@ module.exports = class {
     return this._icon;
   }
 
-  _canDownload = true;
+  _canDownload = false;
   get canDownload() {
     return this._canDownload;
   }
 
   // If this is not supported, return false.
   // Should return a boolean download status.
-  download = async () => {
+  download = async (location) => {
     return false;
   };
 
